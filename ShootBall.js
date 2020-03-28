@@ -9,7 +9,7 @@ class ShootBall{
 
     }
 
-    attach(Tanker){}
+    attach(body){}
 
     shoot(){}
 
