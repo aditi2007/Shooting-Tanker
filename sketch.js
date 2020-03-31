@@ -2,41 +2,43 @@
 
 const { Engine, World, Bodies, Body, Mouse, MouseConstraint, Constraint, Composite, Detector } = Matter;
 // The above line creates different constant variables for Engine, World, Bodies etc.
-var engine,world,ground,tanker,shootingBall,cannonball;
+var ground,tanker,canonball,shootball,ball;
 /*
 
 const {Engine} = Matter 
-is the same as c
-onst Engine = Matter.Engine
+is the same as 
+const Engine = Matter.Engine
 
 */
 
 function setup() {
     // Setup the canvas, the ground the, tanker, the shooting ball and the bubble balls.
-    var canvas = createCanvas(400,400);
+    var canvas = createCanvas(800,400);
     engine = Engine.create();
     world = engine.world;
-    tanker = Tanker.create();
-    world = tanker.world;
-    shootingBall = Ball.create();
-    world = shootingBall.world;
-    cannonball =cannonBall.create();
-    world = cannonball.world;
-    ground=new Ground(400,10,20,20);
+
+    ground = new Ground(800,100,20,20);
+    tanker=new Tanker(100,100,20,20);
+    canonball=new CanonBall(450,250,20,20);
+    ball=new Ball(370,270,4);
+    shootball=new ShootBall(tanker.ball,{x:350,y:250} );
 
 }
 
 function draw() {
 // Remember to update the Matter Engine and set the background.
-background(0);
+background("yellow");
 Engine.update(engine);
-tanker.display();
-shootingBall.display();
-cannonball.display();
+strokeWeight(4)
 ground.display();
+tanker.display();
+cannonball.display();
+ball.display();
+shootball.display();
 }
 
 
 function keyReleased() {
     // Call the shoot method for the cannon.
+    shootball.fly();
 }
